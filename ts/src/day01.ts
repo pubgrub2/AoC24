@@ -43,7 +43,40 @@ function problem1(input: string[]): string{
 }
 
 function problem2(input: string[]): string{
-  let output = ""
+  let total: number = 0
+
+  let left: number[] = []
+  let right: number[] = []
+
+  for(let i=0; i<input.length; i++){
+    let numbers = input[i].split("   ")
+    left.push(+numbers[0])
+    right.push(+numbers[1])
+  }
+
+  left = left.sort()
+  right = right.sort()
+
+  if (left.length !== right.length){console.log("error: left length and right length not equal"); return "error"}
+
+  let Amount: Record<string, number> = {}
+  
+  for(let i=0; i<right.length; i++){
+    if (Amount[right[i]] !== undefined) {
+      Amount[right[i]]++
+    }
+    else {
+      Amount[right[i]] = 1
+    }
+  }
+
+  for(let i=0; i<left.length; i++){
+    if (Amount[left[i]] !== undefined) {
+      total += left[i]*Amount[left[i]]
+    }
+  }
+
+  let output = total.toString()
   return output
 }
 
