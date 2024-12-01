@@ -9,20 +9,22 @@ const dataFile = "../../data/day" + day
 let inputData: string[]
 
 if (test === true) {
-  inputData = readFileSync(testDataFile).toString().split("\n")
+  inputData = readFileSync(testDataFile).toString().trimEnd().split("\n")
   inputData = inputData.map(str => (str.trim()))
 }
 
 else {
-  inputData = readFileSync(dataFile).toString().split("\n")
+  inputData = readFileSync(dataFile).toString().trimEnd().split("\n")
   inputData = inputData.map(str => (str.trim()))
 }
 
 function problem1(input: string[]): string{
-  for(let i=0; i<input.length-1; i++){
-    
+  let total: number
+  for(let i=0; i<input.length; i++){
+    let numbers = input[i].split("   ")
+    total += (+numbers[0] - +numbers[1]).
   }
-  let output = ""
+  let output = total.toString()
   return output
 }
 
