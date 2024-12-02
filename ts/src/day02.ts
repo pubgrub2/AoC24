@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 
 const day = "02"
-const test: boolean = false
+const test: boolean = true
 
 const testDataFile = "../../testdata/day" + day
 const dataFile = "../../data/day" + day
@@ -61,9 +61,55 @@ function problem1(input: string[]): string{
 }
 
 function problem2(input: string[]): string{
+  const splitIntoNumbers = /(\d+)/g
 
+  let total: number = 0
 
-  let output = ""
+  for(let i=0; i<input.length; i++) {
+
+    let x: number[] = []
+    let y = input[i].match(splitIntoNumbers)
+
+    if (y !== null) {x = y.map(str => +str)}
+    else {console.log("continued"); continue}
+
+    let direction: number = 0
+
+    let error: boolean = false
+
+    for(let l=0; l<x.length-1; l++) {
+      let current = x[l]
+      let next = x [l+1]
+      console.log(x)
+      if ( current < next ) {
+        if (direction === 0) {direction = 1}
+        if (direction === 2 && !error) {error = true}
+        if (direction === 2 && error) {break}
+        if ( next - current >= 1 && next - current <= 3 ) { if ( l === x.length-2 ) { total++; console.log("success1") } }
+        else {
+          if (!error) {error = true}
+          else {break}
+        }
+      }
+
+      if ( current > next ) {
+        if (direction === 0) {direction = 2}
+        if (direction === 1 && !error) {error = true}
+        if (direction === 1 && error) {break}
+        if ( current - next >= 1 && current - next <= 3 ) { if ( l === x.length-2 ) { total++; console.log("success2") } }
+        else {
+          if (!error) {error = true}
+          else {break}
+        }
+      }
+
+      if ( current === next ) {break}
+      if ( current === next ) {break}
+
+    }
+  }
+
+  let output = total.toString()
   return output
 }
 
